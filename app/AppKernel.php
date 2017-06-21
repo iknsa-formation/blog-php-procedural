@@ -1,5 +1,9 @@
 <?php
 
+require_once 'app/db/db.php';
+
 $bundles = [
-    'App'
+    'App',
+    'Post',
+    'User'
 ];

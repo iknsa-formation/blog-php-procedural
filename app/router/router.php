@@ -17,7 +17,7 @@ foreach ($bundles as $bundle) {
  * @todo gérer les 404
  */
 if (!isset($routes[$route])) {
-    die("La page n'existe pas!");
+    $route = "404";
 }
 
 
