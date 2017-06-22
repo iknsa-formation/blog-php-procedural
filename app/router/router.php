@@ -13,9 +13,6 @@ foreach ($bundles as $bundle) {
     require_once 'src/' . $bundle . 'Bundle/resources/config/routing.php';
 }
 
-/**
- * @todo gérer les 404
- */
 if (!isset($routes[$route])) {
     $route = "404";
 }
