@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require_once 'app/AppKernel.php';
 require_once 'app/router/router.php';
 ?>
@@ -112,8 +115,31 @@ require_once 'app/router/router.php';
     </header>
     <!--/#header-->
 
+    <?php if (isset($_SESSION["flash"]) && !empty($_SESSION["flash"])): ?>
+        <?php foreach ($_SESSION["flash"] as $index => $flash): ?>
+            <?php if (isset($flash["type"]) && isset($flash["message"])): ?>
+                <p class="container alert alert-<?= $flash["type"] ?>"><?= $flash["message"] ?></p>
+            <?php endif; ?>
+
+            <?php
+            $_SESSION["flash"][$index]["viewed"]++;
+            if (isset($flash["viewed"]) && $flash["viewed"] >= 1) {
+                unset($_SESSION["flash"][$index]);
+            }
+            ?>
+
+        <?php endforeach; ?>
+    <?php endif; ?>
+
     <?php
-    include_once $data["view"];
+    if (is_file($data["view"])) {
+        include_once $data["view"];
+    } else {
+        /**
+         * @log l'erreur. Le fichier $data["view"] n'a pas été trouvé
+         */
+        echo 'Le fichier n\'existe pas';
+    }
     ?>
 
     <footer id="footer">

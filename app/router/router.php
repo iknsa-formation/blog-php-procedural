@@ -35,4 +35,4 @@ if (!function_exists($functionName)) {
     die('La fonction ' . $functionName . ' n\'existe pas!');
 }
 
-$data = $functionName();
+$data = $functionName($db);
