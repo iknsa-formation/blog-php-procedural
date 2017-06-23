@@ -1,26 +1,30 @@
 <?php
 
-function PostIndex ()
+function PostIndex ($db)
 {
+    $posts = $db->query("SELECT p.*, u.username as author FROM `post` AS p, `bloguser` as u WHERE p.`author`=u.`id`")->fetchAll($db::FETCH_ASSOC);
+
     return [
-        "view" => "src/PostBundle/resources/views/blog.php"
+        "view" => "src/PostBundle/resources/views/blog.php",
+        "posts" => $posts
     ];
 }
 
-function PostShow ()
+function PostShow ($db)
 {
+    $id = $_GET["id"];
+
+    $post = $db->query("SELECT p.*, u.username as author FROM `post` AS p, `bloguser` as u WHERE p.`author`=u.`id` AND p.id = " . $id)->fetch($db::FETCH_ASSOC);
+
     return [
-        "view" => "src/PostBundle/resources/views/detail.php"
+        "view" => "src/PostBundle/resources/views/detail.php",
+        "post" => $post
     ];
 }
 
 function PostNew($db)
 {
     if (strtolower($_SERVER["REQUEST_METHOD"]) === 'post') {
-        echo "<pre>";
-        var_dump($_POST);
-        var_dump($_FILES);
-
         $file = $_FILES["image"];
         $fileName = uniqid();
         $originalFileName = $file["name"];
@@ -51,8 +55,6 @@ function PostNew($db)
 
             $query->execute();
         }
-
-        echo "</pre>";
     }
 
     return [

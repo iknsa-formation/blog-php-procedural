@@ -21,6 +21,9 @@ require_once 'app/router/router.php';
     <link href="web/css/main.css" rel="stylesheet">
     <link href="web/css/responsive.css" rel="stylesheet">
 
+    
+    <script type="text/javascript" src="web/js/jquery.js"></script>
+
     <!--[if lt IE 9]>
         <script src="web/js/html5shiv.js"></script>
         <script src="web/js/respond.min.js"></script>
@@ -224,7 +227,6 @@ require_once 'app/router/router.php';
     </footer>
     <!--/#footer-->
 
-    <script type="text/javascript" src="web/js/jquery.js"></script>
     <script type="text/javascript" src="web/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="web/js/lightbox.min.js"></script>
     <script type="text/javascript" src="web/js/wow.min.js"></script>
