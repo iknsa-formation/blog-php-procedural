@@ -15,29 +15,31 @@ function UserRegister($db)
                 VALUES (:username, :email, :password, :avatar, :salt)"
         );
 
-        $username = $db->quote($_POST["username"]);
+        $username = $_POST["username"];
 
         /**
          * @todo si le username ne correspond pas à nos critères. On retourne une erreur.
          * critères /[a-z+][0-9+]/i
+         * @return $valid false
          */
         
         /**
          * @todo controle email: FILTER_VALIDATE_EMAIL
+         * @return $valid false
          */
         
         /**
          * @todo ^\W min=>6
+         * @return $valid false
          */
 
-        $valid = false;
-
+        $valid = true;
 
         if ($valid) {
             $query->bindValue(':username', $username);
-            $query->bindValue(':email', $db->quote($_POST["email"]));
-            $query->bindValue(':password', password_hash($db->quote($_POST["password"]) . $salt, PASSWORD_BCRYPT));
-            $query->bindValue(':avatar', $db->quote($_POST["avatar"]));
+            $query->bindValue(':email', $_POST["email"]);
+            $query->bindValue(':password', password_hash($_POST["password"] . $salt, PASSWORD_BCRYPT));
+            $query->bindValue(':avatar', $_POST["avatar"]);
             $query->bindValue(':salt', $salt);
 
             $query->execute();

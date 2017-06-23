@@ -98,8 +98,13 @@ require_once 'app/router/router.php';
                                 <li><a href="portfoliothree.html">2 Columns</a></li>
                                 <li><a href="portfolio-details.html">Portfolio Details</a></li>
                             </ul>
-                        </li>                         
-                        <li><a href="shortcodes.html ">Shortcodes</a></li>                    
+                        </li>
+                        <?php if(isset($_SESSION["security"]["isAuthenticated"]) && $_SESSION["security"]["isAuthenticated"]): ?>
+                            <li><a href=""><?= $_SESSION["security"]["user"]["username"] ?></a></li>
+                            <li><a href="/blog/?route=logout">Deconnexion</a></li>
+                        <?php else: ?>
+                            <li><a href="shortcodes.html ">Shortcodes</a></li>                    
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="search">
